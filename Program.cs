@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization.Formatters;
+using System.Text.RegularExpressions;
 
 class Program
 {
@@ -29,6 +30,7 @@ class Program
             }
 
             var map = outputFilePath + ".map";
+ 
 
             var text = System.IO.File.ReadAllText(outputFilePath)
             .Replace(
@@ -37,7 +39,11 @@ class Program
             ).Replace(
                 @"import { jsx as _jsx, jsxs as _jsxs } from ""react/jsx-runtime"";",
                 $@"import {{ jsx as _jsx, jsxs as _jsxs }} from ""{depthModifier}react/jsx-runtime.js"";"
-            );
+            ).Replace("{ className:", "{ class:");
+
+  
+
+
 
 
 
